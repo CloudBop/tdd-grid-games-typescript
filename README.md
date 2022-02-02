@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# TDD GOL
+
+An attempt at TDD with react for GOL.
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
