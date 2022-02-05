@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 test("renders App header", () => {
@@ -21,4 +22,19 @@ test("renders a 2x2 grid", () => {
   const simpleGrid = screen.getAllByRole("gridcell");
   // 2x2 grid
   expect(simpleGrid.length === 4).toBe(true);
+});
+
+test("when a cell is clicked, invert the cell state", () => {
+  render(<App />);
+  // don't know in advance as grid is filled randomly
+  const simpleGrid = screen.getAllByRole("gridcell");
+  // 2x2 grid
+  const prev = simpleGrid[0];
+  expect(prev).toHaveClass("cell");
+  // get current cell state
+  const prevText = prev.innerHTML;
+  userEvent.click(prev);
+  const afterText = prev.innerHTML;
+  // assert it has updated
+  expect(afterText !== prevText).toBe(true);
 });
