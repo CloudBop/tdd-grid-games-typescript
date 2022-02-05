@@ -41,15 +41,43 @@ test("renders a 'tick' button to run a regeneration", () => {
   expect(tickButton).toBeEnabled();
 });
 
-// not implmeneted
-// test("when the 'tick' button is clicked, run a regeneration", () => {
-//   render(<App />);
-//   const tickButton = screen.getByRole("button", {
-//     name: "Regenerate",
-//   });
-//   //
-//   expect(tickButton).toBeEnabled();
-//   userEvent.click(tickButton);
+test("when the 'tick' button is clicked, run a regeneration", () => {
+  // creating [][] of 0s
+  render(<App />);
 
-//   expect(spyRegenerateLifecycle).toHaveBeenCalled();
-// });
+  const tickButton = screen.getByRole("button", {
+    name: "Regenerate",
+  });
+
+  //cells
+  const simpleGrid = screen.getAllByRole("gridcell");
+  // 5x5 grid, `flattened` was 2d, but now 1d of html Array List
+  const prev = simpleGrid;
+
+  const cell00 = prev[0];
+  const cell01 = prev[1];
+
+  const cell10 = prev[5];
+  const cell11 = prev[6];
+
+  // turn on 3 elements in top grid corner,
+  userEvent.click(cell00);
+  userEvent.click(cell01);
+  userEvent.click(cell10);
+  // assert this is the case
+  expect(cell00.innerHTML === "1").toBe(true);
+  expect(cell01.innerHTML === "1").toBe(true);
+  expect(cell10.innerHTML === "1").toBe(true);
+  expect(cell11.innerHTML === "0").toBe(true);
+
+  // is button on?, then click
+  expect(tickButton).toBeEnabled();
+  // run a generation
+  userEvent.click(tickButton);
+
+  // now the 4th sqaure should be filled.
+  expect(cell00.innerHTML === "1").toBe(true);
+  expect(cell01.innerHTML === "1").toBe(true);
+  expect(cell10.innerHTML === "1").toBe(true);
+  expect(cell11.innerHTML === "1").toBe(true);
+});

@@ -11,7 +11,8 @@ const numCols = 5;
 const numRows = 5;
 function App() {
   const [grid, setGrid] = React.useState(() => {
-    return generateRandomTiles(numCols, numRows);
+    //
+    return generateRandomTiles(numCols, numRows, 0);
   });
   return (
     <div className="App">
