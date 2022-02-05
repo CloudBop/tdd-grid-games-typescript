@@ -1,8 +1,8 @@
 //
-import { generateRandomTiles, invertClickedCell } from "./utils"
+import { generateRandomTiles, invertClickedCell, regenerateLifecycle } from "./utils"
 //
 describe('generate grid function 2darray [[row],[col]]', () => {
-  test('should create an 2d array of pecentage weighted random true||false', () => {
+  test('should create an 2d array of pecentage weighted random 1||0', () => {
     // 
     const gridResult = generateRandomTiles();
     /**
@@ -59,5 +59,26 @@ describe('generate grid function 2darray [[row],[col]]', () => {
   //    */
   //   expect(gridResult.length === 4).toBe(true)
   // })
+})
+
+describe("gol algo ", () => {
+  // ASSERT
+  //
+  test('dead cell with no neighbours should remain dead 0', () => {
+    /*
+    [
+      [0,0,0],
+      [0,0,0],
+      [0,0,0]
+    ]
+    */
+    const gridInit = generateRandomTiles(3, 3, 0);
+    const cell = gridInit[1][1]
+    expect(cell === 0).toBe(true)
+
+    const updatedGrid = regenerateLifecycle(gridInit);
+    const updatedCell = updatedGrid[1][1]
+    expect(updatedCell === 0).toBe(true)
+  })
 })
 
