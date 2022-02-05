@@ -1,7 +1,6 @@
 import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-import SimpleButton from "./UserInterface/SimpleButton";
 import { generateRandomTiles, invertClickedCell } from "./utils/utils";
 const numCols = 5;
 const numRows = 5;
@@ -52,8 +51,7 @@ function App() {
         </div>
       </header>
       <div className="App-wrapper">
-        <SimpleButton />
-
+        <button>Regenerate</button>
         <div
           style={{
             display: "grid",

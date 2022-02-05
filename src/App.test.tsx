@@ -2,20 +2,15 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+import { mockRegenerateLifecycle } from "./utils/utils";
 
+const spyRegenerateLifecycle = jest.fn(mockRegenerateLifecycle);
 test("renders App header", () => {
   render(<App />);
   const headerElement = screen.getByText(/Game Of Life/i);
   expect(headerElement).toBeInTheDocument();
 });
-test("renders a button", () => {
-  render(<App />);
-  const simpleButton = screen.getByRole("button", {
-    name: "Click Me",
-  });
 
-  expect(simpleButton).toBeEnabled();
-});
 test("renders a 5x5 grid", () => {
   render(<App />);
   //
@@ -38,3 +33,25 @@ test("when a cell is clicked, invert the cell state", () => {
   // assert it has updated
   expect(afterText !== prevText).toBe(true);
 });
+
+test("renders a 'tick' button to run a regeneration", () => {
+  render(<App />);
+  const tickButton = screen.getByRole("button", {
+    name: "Regenerate",
+  });
+  //
+  expect(tickButton).toBeEnabled();
+});
+
+// not implmeneted
+// test("when the 'tick' button is clicked, run a regeneration", () => {
+//   render(<App />);
+//   const tickButton = screen.getByRole("button", {
+//     name: "Regenerate",
+//   });
+//   //
+//   expect(tickButton).toBeEnabled();
+//   userEvent.click(tickButton);
+
+//   expect(spyRegenerateLifecycle).toHaveBeenCalled();
+// });
