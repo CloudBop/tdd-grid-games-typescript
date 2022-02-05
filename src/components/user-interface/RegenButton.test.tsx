@@ -14,5 +14,4 @@ test("renders Button", () => {
   expect(tickButton).toBeEnabled();
   userEvent.click(tickButton);
   expect(handleChange).toHaveBeenCalledTimes(1);
-  // expect(headerElement).toBeInTheDocument();
 });

@@ -1,7 +1,12 @@
 import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-import { generateRandomTiles, invertClickedCell } from "./utils/utils";
+import RegenButton from "./components/user-interface/RegenButton";
+import {
+  generateRandomTiles,
+  invertClickedCell,
+  regenerateLifecycle,
+} from "./utils/utils";
 const numCols = 5;
 const numRows = 5;
 function App() {
@@ -51,7 +56,14 @@ function App() {
         </div>
       </header>
       <div className="App-wrapper">
-        <button>Regenerate</button>
+        <RegenButton
+          handleClick={function (): void {
+            setGrid((prev) => {
+              const newState = regenerateLifecycle(prev);
+              return newState;
+            });
+          }}
+        />
         <div
           style={{
             display: "grid",
