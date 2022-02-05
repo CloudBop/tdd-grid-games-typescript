@@ -49,12 +49,13 @@
 }
 
 .cell {
-  border: "1px solid #595959";
+  border: 1px solid #595959;
+  font-size: 0;
 }
 
 .on {
-  background-color: lightblue;
+  background-color: #741515;
 }
 .off {
-  background-color: blue;
+  background-color: #d86a6a;
 }
