@@ -35,6 +35,10 @@
   color: white;
 }
 
+.wrapper {
+  width: 900px;
+}
+
 .App-link {
   color: #61dafb;
 }
