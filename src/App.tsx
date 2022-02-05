@@ -3,8 +3,8 @@ import React from "react";
 import "./App.css";
 import SimpleButton from "./UserInterface/SimpleButton";
 import { generateRandomTiles, invertClickedCell } from "./utils/utils";
-const numCols = 2;
-const numRows = 2;
+const numCols = 5;
+const numRows = 5;
 function App() {
   const [grid, setGrid] = React.useState(() => {
     return generateRandomTiles(numCols, numRows);

@@ -16,19 +16,19 @@ test("renders a button", () => {
 
   expect(simpleButton).toBeEnabled();
 });
-test("renders a 2x2 grid", () => {
+test("renders a 5x5 grid", () => {
   render(<App />);
   //
   const simpleGrid = screen.getAllByRole("gridcell");
-  // 2x2 grid
-  expect(simpleGrid.length === 4).toBe(true);
+  // 5x5 grid
+  expect(simpleGrid.length === 25).toBe(true);
 });
 
 test("when a cell is clicked, invert the cell state", () => {
   render(<App />);
   // don't know in advance as grid is filled randomly
   const simpleGrid = screen.getAllByRole("gridcell");
-  // 2x2 grid
+  // 5x5 grid
   const prev = simpleGrid[0];
   expect(prev).toHaveClass("cell");
   // get current cell state
