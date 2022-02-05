@@ -61,3 +61,40 @@ export const invertClickedCell = (
   //
   return newGrid;
 };
+
+export const operations = [
+  [0, 1],
+  [0, -1],
+  [1, -1],
+  [-1, 1],
+  [1, 1],
+  [-1, -1],
+  [1, 0],
+  [-1, 0],
+];
+export const regenerateLifecycle = (gCurrent: (0 | 1)[][]) => {
+  let gCopy = deepCopy(gCurrent);
+  //
+  const numRows = gCopy.length;
+  const numCols = gCopy[0].length;
+  //
+  for (let i = 0; i < numRows; i++) {
+    for (let k = 0; k < numCols; k++) {
+      let neighbours = 0;
+      //
+      operations.forEach(([x, y]) => {
+        const newI = i + x;
+        const newK = k + y;
+        // check grid boundries
+        if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
+          // count on neighbours
+          neighbours += gCurrent[newI][newK];
+        }
+      });
+    }
+  }
+
+  return gCopy;
+};
+
+export const mockRegenerateLifecycle = regenerateLifecycle;

@@ -73,6 +73,7 @@ describe("gol algo ", () => {
     ]
     */
     const gridInit = generateRandomTiles(3, 3, 0);
+    // middle cell
     const cell = gridInit[1][1]
     expect(cell === 0).toBe(true)
 
