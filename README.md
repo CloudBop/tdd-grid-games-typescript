@@ -1,6 +1,6 @@
 # TDD GOL
 
-An attempt at TDD with react for GOL.
+An attempt at TDD with react-testing-library + implementation unit tests for GOL.
 
 ---
 
