@@ -17,19 +17,20 @@ const deepCopy = (arr: (1 | 0)[][]) => {
   return copy;
 };
 
-const deepCloneArrayOnly = (arr: []) => {
-  //  deepCloneArrayOnly - ie 2Darrays of primitive values
-  var len = arr.length;
-  var newArr = new Array(len);
-  for (var i = 0; i < len; i++) {
-    if (Array.isArray(arr[i])) {
-      newArr[i] = deepCloneArrayOnly(arr[i]);
-    } else {
-      newArr[i] = arr[i];
-    }
-  }
-  return newArr;
-};
+// recursive deepClone of multi-demnsion array of primitives [][]
+// const deepCloneArrayOnly = (arr: []) => {
+//   //  deepCloneArrayOnly - ie 2Darrays of primitive values
+//   var len = arr.length;
+//   var newArr = new Array(len);
+//   for (var i = 0; i < len; i++) {
+//     if (Array.isArray(arr[i])) {
+//       newArr[i] = deepCloneArrayOnly(arr[i]);
+//     } else {
+//       newArr[i] = arr[i];
+//     }
+//   }
+//   return newArr;
+// };
 
 // Todo - create an interface for these arguments
 export const generateRandomTiles = (
