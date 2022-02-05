@@ -61,7 +61,7 @@ describe('generate grid function 2darray [[row],[col]]', () => {
   // })
 })
 
-describe("gol algo ", () => {
+describe("gol algo", () => {
   // ASSERT
   //
   test('dead cell with no neighbours should remain dead 0', () => {
