@@ -81,5 +81,92 @@ describe("gol algo ", () => {
     const updatedCell = updatedGrid[1][1]
     expect(updatedCell === 0).toBe(true)
   })
+
+  test('dead cell with less than 2 neightbours dies, rules 1(underpopulation)', () => {
+
+    const gridInit = [
+      [1, 1, 0],
+      [0, 0, 0],
+      [0, 0, 0]
+    ]
+    //
+    expect(gridInit[0][0] === 1).toBe(true)
+    expect(gridInit[0][1] === 1).toBe(true)
+
+    const updatedGrid = regenerateLifecycle(gridInit);
+    // these should be dead
+    expect(updatedGrid[0][0] === 0).toBe(true)
+    expect(updatedGrid[0][1] === 0).toBe(true)
+  })
+
+  test('dead cell with more than 3 neightbours dies, rules 3(overpopulation)', () => {
+
+    const gridInit = [
+      [0, 1, 0],
+      [1, 1, 1],
+      [0, 1, 0]
+    ]
+    //
+    expect(gridInit[0][0] === 0).toBe(true)
+    expect(gridInit[0][1] === 1).toBe(true)
+    expect(gridInit[1][1] === 1).toBe(true)
+
+    const updatedGrid = regenerateLifecycle(gridInit);
+    // these should be dead
+    expect(updatedGrid[1][1] === 0).toBe(true)
+  })
+
+  test("Any dead cell with exactly three live neighbours becomes a live cell as if by reproduction.", () => {
+
+    const gridInit = [
+      [0, 0, 0],
+      [0, 1, 1],
+      [0, 1, 0]
+    ]
+    //
+    expect(gridInit[2][2] === 0).toBe(true)
+
+    const updatedGrid = regenerateLifecycle(gridInit);
+    // these should be live
+    expect(updatedGrid[2][2] === 1).toBe(true)
+  })
+
+
+  test("two frame animation", () => {
+
+    const gridInit = [
+      [0, 1, 0],
+      [0, 1, 0],
+      [0, 1, 0]
+    ]
+    //
+    expect(gridInit[0][1] === 1).toBe(true)
+    expect(gridInit[2][1] === 1).toBe(true)
+    // 
+    expect(gridInit[1][0] === 0).toBe(true)
+    expect(gridInit[1][2] === 0).toBe(true)
+    //
+    expect(gridInit[1][1] === 1).toBe(true)
+
+    // frame2
+    let updatedGrid = regenerateLifecycle(gridInit);
+    expect(updatedGrid[0][1] === 0).toBe(true)
+    expect(updatedGrid[2][1] === 0).toBe(true)
+    // these should be inverted
+    expect(updatedGrid[1][0] === 1).toBe(true)
+    expect(updatedGrid[1][2] === 1).toBe(true)
+    // 
+    expect(updatedGrid[1][1] === 1).toBe(true)
+
+    // frame 3 (===frame1)
+    updatedGrid = regenerateLifecycle(updatedGrid);
+    expect(updatedGrid[0][1] === 1).toBe(true)
+    expect(updatedGrid[2][1] === 1).toBe(true)
+    // 
+    expect(updatedGrid[1][0] === 0).toBe(true)
+    expect(updatedGrid[1][2] === 0).toBe(true)
+    //
+    expect(updatedGrid[1][1] === 1).toBe(true)
+  })
 })
 

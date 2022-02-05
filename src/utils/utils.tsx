@@ -87,14 +87,19 @@ export const regenerateLifecycle = (gCurrent: (0 | 1)[][]) => {
         const newK = k + y;
         // check grid boundries
         if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
-          // count on neighbours
           neighbours += gCurrent[newI][newK];
         }
       });
+      // life logic
+      if (neighbours < 2 || neighbours > 3) {
+        // kill. rules 1 & 3
+        gCopy[i][k] = 0;
+      } else if (gCurrent[i][k] === 0 && neighbours === 3) {
+        // rule 4
+        gCopy[i][k] = 1;
+        // notice- rule2 does nothing
+      }
     }
   }
-
   return gCopy;
 };
-
-export const mockRegenerateLifecycle = regenerateLifecycle;
