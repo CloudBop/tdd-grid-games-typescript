@@ -2,9 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { mockRegenerateLifecycle } from "./utils/utils";
 
-const spyRegenerateLifecycle = jest.fn(mockRegenerateLifecycle);
 test("renders App header", () => {
   render(<App />);
   const headerElement = screen.getByText(/Game Of Life/i);
