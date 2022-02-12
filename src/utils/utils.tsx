@@ -36,7 +36,7 @@ const deepCopy = (arr: (1 | 0)[][]) => {
 export const generateRandomTiles = (
   numRows: number = 2,
   numCols: number = 2,
-  // // returns a dead cell 70% of the time, should b decimal point
+  // returns a dead cell 70% of the time, should b decimal point
   chanceOfLife: number = 0.5 // below is ts syntax for returning 2d array
 ): (0 | 1)[][] => {
   const rows = [];
@@ -53,7 +53,7 @@ export const invertClickedCell = (
   gCurrent: (0 | 1)[][],
   i: number,
   k: number
-): [][] => {
+): (0 | 1)[][] => {
   // use immmer to not mutate state, not easy with TS as immer.produce() returns strange fn type ![]
   // let newGrid = deepCopy(gCurrent);
   let newGrid = deepCopy(gCurrent);
@@ -103,4 +103,32 @@ export const regenerateLifecycle = (gCurrent: (0 | 1)[][]) => {
     }
   }
   return gCopy;
+};
+
+export const lightsOutGridGame = (
+  gCurrent: (0 | 1)[][],
+  i: number,
+  k: number
+): (0 | 1)[][] => {
+  // use immmer to not mutate state, not easy with TS as immer.produce() returns strange fn type ![]
+  // let newGrid = deepCopy(gCurrent);
+  let newGrid = deepCopy(gCurrent);
+  let nrows = newGrid.length;
+  let ncols = newGrid[0].length;
+  //invert cell - this cell must exist as it was the clicked cell...
+  newGrid[i][k] = newGrid[i][k] ? 0 : 1;
+  // check cell actually exists before trying to flip it
+  function flipCell(y: number, x: number) {
+    // if this coord is actually on board, flip it
+    if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+      // console.log("newGrid[y][x]", newGrid[y][x]);
+      newGrid[x][y] = newGrid[x][y] ? 0 : 1;
+    }
+  }
+  flipCell(k, i - 1); //flip left
+  flipCell(k, i + 1); //flip right
+  flipCell(k - 1, i); //flip below
+  flipCell(k + 1, i); //flip above
+
+  return newGrid;
 };

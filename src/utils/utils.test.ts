@@ -3,6 +3,7 @@ import {
   generateRandomTiles,
   invertClickedCell,
   regenerateLifecycle,
+  lightsOutGridGame,
 } from "./utils";
 //
 describe("generate grid function 2darray [[row],[col]]", () => {
@@ -166,5 +167,46 @@ describe("gol algo", () => {
     expect(updatedGrid[1][2] === 0).toBe(true);
     //
     expect(updatedGrid[1][1] === 1).toBe(true);
+  });
+});
+
+describe("lights out algo", () => {
+  test("clicked cell should invert itself and the four neighbouring cells with an adjacent edge", () => {
+    let chanceOfLife = 0;
+    // 5x5 grid of deadcells
+    const gridResult = generateRandomTiles(5, 5, chanceOfLife);
+    //
+    let updatedGrid = lightsOutGridGame(gridResult, 2, 2);
+    expect(updatedGrid[2][2] === 1).toBe(true);
+    expect(updatedGrid[2][2 - 1] === 1).toBe(true);
+    expect(updatedGrid[2][2 + 1] === 1).toBe(true);
+    expect(updatedGrid[2 - 1][2] === 1).toBe(true);
+    expect(updatedGrid[2 + 1][2] === 1).toBe(true);
+    // asset on the second click turns them off
+    updatedGrid = lightsOutGridGame(updatedGrid, 2, 2);
+    expect(updatedGrid[2][2] === 0).toBe(true);
+    expect(updatedGrid[2][2 - 1] === 0).toBe(true);
+    expect(updatedGrid[2][2 + 1] === 0).toBe(true);
+    expect(updatedGrid[2 - 1][2] === 0).toBe(true);
+    expect(updatedGrid[2 + 1][2] === 0).toBe(true);
+    //
+  });
+
+  test("clicked corner cell should invert cells and the four neighbouring cells with an adjacent edge that exist", () => {
+    const gridInit = [
+      [0, 1, 0, 0, 0],
+      [1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      //
+    ] as (0 | 1)[][];
+
+    let updatedGrid = lightsOutGridGame(gridInit, 0, 0);
+    expect(updatedGrid[0][0] === 1).toBe(true);
+
+    // these should be inverted to 0
+    expect(updatedGrid[0][1] === 0).toBe(true);
+    expect(updatedGrid[1][0] === 0).toBe(true);
   });
 });
