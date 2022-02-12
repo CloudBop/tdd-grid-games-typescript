@@ -1,0 +1,19 @@
+.golTwoDimArrayContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff79b;
+}
+
+.golTwoDimArrayContainer > div {
+  width: 50%;
+}
+
+.golTwoDimArrayContainer p {
+  text-align: left;
+  margin-left: 1rem;
+}
+.golTwoDimArrayContainer ul {
+  text-align: left;
+  margin-left: 1rem;
+}
