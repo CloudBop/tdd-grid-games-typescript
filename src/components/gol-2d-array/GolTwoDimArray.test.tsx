@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GolTwoDimArray from "./GolTwoDimArray";
 
@@ -17,7 +17,7 @@ test("renders a 5x5 grid", () => {
   expect(simpleGrid.length === 25).toBe(true);
 });
 
-test("when a cell is clicked, invert the cell state", () => {
+test("when a cell is clicked, invert the cell state", async () => {
   render(<GolTwoDimArray />);
   // don't know in advance as grid is filled randomly
   const simpleGrid = screen.getAllByRole("gridcell");
@@ -26,7 +26,14 @@ test("when a cell is clicked, invert the cell state", () => {
   expect(prev).toHaveClass("cell");
   // get current cell state
   const prevText = prev.innerHTML;
-  userEvent.click(prev);
+  fireEvent(
+    prev,
+    new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+    })
+  );
+
   const afterText = prev.innerHTML;
   // assert it has updated
   expect(afterText !== prevText).toBe(true);
@@ -61,9 +68,10 @@ test("when the 'tick' button is clicked, run a regeneration", () => {
   const cell11 = prev[6];
 
   // turn on 3 elements in top grid corner,
-  userEvent.click(cell00);
-  userEvent.click(cell01);
-  userEvent.click(cell10);
+
+  fireEvent.click(cell00);
+  fireEvent.click(cell01);
+  fireEvent.click(cell10);
   // assert this is the case
   expect(cell00.innerHTML === "1").toBe(true);
   expect(cell01.innerHTML === "1").toBe(true);
@@ -73,7 +81,7 @@ test("when the 'tick' button is clicked, run a regeneration", () => {
   // is button on?, then click
   expect(tickButton).toBeEnabled();
   // run a generation
-  userEvent.click(tickButton);
+  fireEvent.click(tickButton);
 
   // now the 4th sqaure should be filled.
   expect(cell00.innerHTML === "1").toBe(true);

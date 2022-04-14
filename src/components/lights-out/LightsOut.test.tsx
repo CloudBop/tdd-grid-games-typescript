@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LightsOut from "./LightsOut";
 
@@ -23,7 +23,6 @@ test("when a cell is clicked, invert the cell state and that of it's adjacent ne
   // if
   render(<LightsOut />);
   const simpleGrid = screen.getAllByRole("gridcell");
-
   expect(simpleGrid).toHaveLength(25);
   // 5x5 grid - but flattened into a 1 dimeensional array
   const prevLeftTopCorner = simpleGrid[0];
@@ -38,7 +37,7 @@ test("when a cell is clicked, invert the cell state and that of it's adjacent ne
 
   // get current cell state
 
-  userEvent.click(prevLeftTopCorner);
+  fireEvent.click(prevLeftTopCorner);
 
   const aLeftTopCorner = prevLeftTopCornerAdjacentRight.innerHTML;
   const aLeftTopCornerAdjacentRight = prevLeftTopCornerAdjacentRight.innerHTML;

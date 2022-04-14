@@ -2,6 +2,10 @@
 
 An attempt at TDD with react-testing-library + implementation unit tests for GOL.
 
+Note on recent upgrade to React 18 and all the rest.
+
+userEvent broke the testing suites as the assertions are invoked before the component state change. Changing userEvent to fireEvent stopped this problem (which seems seems familiar to... https://github.com/testing-library/user-event/issues/255)
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

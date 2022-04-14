@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import RegenButton from "./RegenButton";
 
@@ -12,6 +12,6 @@ test("renders Button", () => {
   });
 
   expect(tickButton).toBeEnabled();
-  userEvent.click(tickButton);
+  fireEvent.click(tickButton);
   expect(handleChange).toHaveBeenCalledTimes(1);
 });
