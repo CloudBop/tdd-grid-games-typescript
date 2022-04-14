@@ -104,6 +104,40 @@ export const regenerateLifecycle = (gCurrent: (0 | 1)[][]) => {
   }
   return gCopy;
 };
+export const regenerateLifecycleWrapGridAround = (gCurrent: (0 | 1)[][]) => {
+  let gCopy = deepCopy(gCurrent);
+  //
+  const numRows = gCopy.length;
+  const numCols = gCopy[0].length;
+  //
+  for (let i = 0; i < numRows; i++) {
+    for (let k = 0; k < numCols; k++) {
+      // let neighbours = 0;
+      //
+      //
+      const countNeighbors = (gCopy: (0 | 1)[][], x: number, y: number) => {
+        return operations.reduce((acc, [i, j]) => {
+          const row = (x + i + numRows) % numRows;
+          const col = (y + j + numCols) % numCols;
+          acc += gCopy[row][col];
+          return acc;
+        }, 0);
+      };
+      //
+      let neighbours = countNeighbors(gCopy, i, k);
+      // life logic
+      if (neighbours < 2 || neighbours > 3) {
+        // kill. rules 1 & 3
+        gCopy[i][k] = 0;
+      } else if (gCurrent[i][k] === 0 && neighbours === 3) {
+        // rule 4
+        gCopy[i][k] = 1;
+        // notice- rule2 does nothing
+      }
+    }
+  }
+  return gCopy;
+};
 
 export const lightsOutGridGame = (
   gCurrent: (0 | 1)[][],
