@@ -33,3 +33,8 @@
 .off {
   background-color: #d86a6a;
 }
+
+.lights-out-wrapper {
+  margin: 0;
+  background-color: #cc7878;
+}
