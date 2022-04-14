@@ -4,6 +4,7 @@ import {
   invertClickedCell,
   regenerateLifecycle,
   lightsOutGridGame,
+  regenerateLifecycleWrapGridAround,
 } from "./utils";
 //
 describe("generate grid function 2darray [[row],[col]]", () => {
@@ -167,6 +168,29 @@ describe("gol algo", () => {
     expect(updatedGrid[1][2] === 0).toBe(true);
     //
     expect(updatedGrid[1][1] === 1).toBe(true);
+  });
+
+  test("the grid should wrap around itself", () => {
+    const gridInit = [
+      [0, 0, 0],
+      [1, 0, 1],
+      [1, 0, 1],
+    ];
+    //
+    expect(gridInit[1][0] === 1).toBe(true);
+    expect(gridInit[1][2] === 1).toBe(true);
+    expect(gridInit[2][0] === 1).toBe(true);
+    expect(gridInit[2][2] === 1).toBe(true);
+
+    const updatedGrid = regenerateLifecycleWrapGridAround(
+      gridInit as (0 | 1)[][]
+    );
+    // these should be live
+    // expect(updatedGrid[2][2] === 1).toBe(true);
+    expect(updatedGrid[1][0] === 1).toBe(true);
+    expect(updatedGrid[1][2] === 1).toBe(true);
+    expect(updatedGrid[2][0] === 1).toBe(true);
+    expect(updatedGrid[2][2] === 1).toBe(true);
   });
 });
 
