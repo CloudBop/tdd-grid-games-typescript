@@ -30,7 +30,7 @@ function GolTwoDimArray() {
   return (
     <div className={"golTwoDimArrayContainer"}>
       <div className={"App-header"}>
-        <h1> Conway's Game of Life </h1>
+        <h2> Conway's Game of Life </h2>
         <ul>
           <li>
             Any live cell with fewer than two live neighbours dies, as if by
