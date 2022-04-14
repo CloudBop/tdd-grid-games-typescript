@@ -17,7 +17,7 @@ function GolTwoDimArray() {
   const [running, setRunning] = React.useState(false);
   const runningRef = React.useRef(running);
   runningRef.current = running;
-  const runSimulation = React.useCallback((grid) => {
+  const runSimulation = React.useCallback((grid: (0 | 1)[][]) => {
     if (!runningRef.current) {
       return;
     }
