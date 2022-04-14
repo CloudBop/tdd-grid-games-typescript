@@ -17,6 +17,22 @@ test("render enabled create new game button", () => {
   expect(createNewGameButton).toBeEnabled();
   // userEvent.click(createNewGameButton).export default first
 });
+test("create board with everycell off", () => {
+  render(<LightsOut chanceOfOn={0} />);
+  const simpleGrid = screen.getAllByRole("gridcell");
+  expect(simpleGrid).toHaveLength(25);
+  simpleGrid.forEach((cell: HTMLElement, idx) => {
+    expect(cell.innerHTML).toBe("0");
+  });
+});
+test("create board with everycell on", () => {
+  render(<LightsOut chanceOfOn={1} />);
+  const simpleGrid = screen.getAllByRole("gridcell");
+  expect(simpleGrid).toHaveLength(25);
+  simpleGrid.forEach((cell: HTMLElement, idx) => {
+    expect(cell.innerHTML).toBe("1");
+  });
+});
 
 test("when a cell is clicked, invert the cell state and that of it's adjacent neighhbours", () => {
   // don't know in advance as grid is filled randomly - this is probably bad test design
