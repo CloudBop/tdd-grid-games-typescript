@@ -37,7 +37,7 @@ test("create board with everycell on", () => {
 test("when a cell is clicked, invert the cell state and that of it's adjacent neighhbours", () => {
   // don't know in advance as grid is filled randomly - this is probably bad test design
   // if
-  render(<LightsOut />);
+  render(<LightsOut chanceOfOn={0} />);
   const simpleGrid = screen.getAllByRole("gridcell");
   expect(simpleGrid).toHaveLength(25);
   // 5x5 grid - but flattened into a 1 dimeensional array
@@ -60,11 +60,11 @@ test("when a cell is clicked, invert the cell state and that of it's adjacent ne
   const aLeftTopCornerAdjacentBelow = prevLeftTopCornerAdjacentBelow.innerHTML;
 
   expect(aLeftTopCorner !== pLeftTopCorner).toBe(true);
-  // this test can fail
+  // this test can fail, should be fixed now though. see - <LightsOut chanceOfOn={0} /> !
   expect(aLeftTopCornerAdjacentRight !== pLeftTopCornerAdjacentRight).toBe(
     true
   );
-  // this test can fail
+  // this test can fail, should be fixed now though!
   expect(aLeftTopCornerAdjacentBelow !== pLeftTopCornerAdjacentBelow).toBe(
     true
   );
