@@ -9,8 +9,13 @@ function LightsOut() {
   });
   //
   return (
-    <div className="Lights-out-wrapper">
+    <div className="lights-out-wrapper">
       <h2>Lights Out!</h2>
+      <p>
+        Click a cell to turn it on or off. It will also toggle the four
+        neighbours adjacent to each side. The aim of the game is to turn all of
+        the lights out.
+      </p>
       <button
         onClick={() => {
           //
