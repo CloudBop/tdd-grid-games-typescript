@@ -1,11 +1,14 @@
 import React from "react";
 import { generateRandomTiles, lightsOutGridGame } from "../../utils/utils";
 
+export interface LightsOutProps {
+  chanceOfOn?: number;
+}
 const numCols = 5;
 const numRows = 5;
-function LightsOut() {
+const LightsOut = ({ chanceOfOn = 0 }: LightsOutProps) => {
   const [lightsOutGrid, setLightsOutGrid] = React.useState(() => {
-    return generateRandomTiles(numCols, numRows, 0.25);
+    return generateRandomTiles(numCols, numRows, chanceOfOn);
   });
   //
   return (
@@ -54,6 +57,6 @@ function LightsOut() {
       </div>
     </div>
   );
-}
+};
 
 export default LightsOut;

@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <h1 className={"App-header"}>Experiments with Grid Games!</h1>
       <GOL2dArray />
-      <LightsOut />
+      <LightsOut chanceOfOn={0.25} />
     </div>
   );
 }
